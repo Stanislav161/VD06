@@ -1,10 +1,53 @@
+<!-- templates/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Анкета пользователя</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input, textarea { width: 100%; padding: 8px; }
+        button { background: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+        .result { margin-top: 30px; padding: 15px; background: #f0f0f0; }
+    </style>
 </head>
 <body>
+    <h1>Анкета пользователя</h1>
 
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="city">Город:</label>
+            <input type="text" id="city" name="city">
+        </div>
+
+        <div class="form-group">
+            <label for="hobby">Хобби:</label>
+            <textarea id="hobby" name="hobby"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Возраст:</label>
+            <input type="number" id="age" name="age" min="1">
+        </div>
+
+        <button type="submit">Отправить</button>
+    </form>
+
+    {% if submitted %}
+    <div class="result">
+        <h2>Ваши данные:</h2>
+        <p><strong>Имя:</strong> {{ name }}</p>
+        <p><strong>Город:</strong> {{ city if city else 'Не указан' }}</p>
+        <p><strong>Хобби:</strong> {{ hobby if hobby else 'Не указано' }}</p>
+        <p><strong>Возраст:</strong> {{ age if age else 'Не указан' }}</p>
+    </div>
+    {% endif %}
 </body>
 </html>
